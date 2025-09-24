@@ -127,6 +127,28 @@
     });
   });
 
+  // Animasi progress bar skills saat section muncul
+  document.addEventListener('DOMContentLoaded', function() {
+    const skillsSection = document.querySelector('#skills');
+    const progressBars = document.querySelectorAll('.progress-bar');
+    let animated = false;
+
+    function animateSkills() {
+      if (animated) return;
+      const rect = skillsSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        progressBars.forEach(bar => {
+          const value = bar.getAttribute('aria-valuenow');
+          bar.style.width = value + '%';
+        });
+        animated = true;
+      }
+    }
+
+    window.addEventListener('scroll', animateSkills);
+    animateSkills();
+  });
+
   /**
    * Initiate glightbox
    */
